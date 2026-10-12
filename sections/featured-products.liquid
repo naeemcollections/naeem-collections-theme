@@ -1,0 +1,42 @@
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="section__title">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.lead != blank -%}
+        <p class="section__lead">{{ section.settings.lead | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="grid-products">
+      {%- assign featured = section.settings.collection -%}
+      {%- if featured != blank and featured.products_count > 0 -%}
+        {%- for product in featured.products limit: section.settings.limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {% render 'product-card', title: 'Soft Cotton Trouser', price_label: 'Rs. 1,890', url: '/collections/boys-pants', image: 'boys-pants.jpg' %}
+        {% render 'product-card', title: 'Everyday Oxford Shirt', price_label: 'Rs. 1,650', url: '/collections/boys-shirts', image: 'boys-shirt.jpg' %}
+        {% render 'product-card', title: 'Cozy Zip Tracksuit', price_label: 'Rs. 3,490', url: '/collections/boys-tracksuits', image: 'boys-tracksuit.jpg', badge: 'Winter' %}
+        {% render 'product-card', title: 'Sunwashed Play Shorts', price_label: 'Rs. 1,190', url: '/collections/boys-shorts', image: 'boys-shorts.jpg' %}
+        {% render 'product-card', title: 'Blush Rib Top', price_label: 'Rs. 1,450', url: '/collections/girls-tops', image: 'girls-top.jpg' %}
+        {% render 'product-card', title: 'Winter 2pc Suit', price_label: 'Rs. 4,250', compare: 'Rs. 4,990', url: '/collections/girls-2pc-suits', image: 'girls-suit.jpg', badge: 'Sale' %}
+        {% render 'product-card', title: 'Straight Everyday Pant', price_label: 'Rs. 2,950', url: '/collections/mens-pants', image: 'mens-pants.jpg' %}
+        {% render 'product-card', title: 'Relaxed Casual Shirt', price_label: 'Rs. 2,450', url: '/collections/mens-shirts', image: 'mens-shirt.jpg' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured Products" },
+    { "type": "text", "id": "lead", "label": "Lead", "info": "Optional line under the heading." },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Sample cards stay visible until this collection has products." },
+    { "type": "range", "id": "limit", "min": 4, "max": 12, "step": 1, "label": "Products to show", "default": 8 }
+  ],
+  "presets": [
+    { "name": "Featured products" }
+  ]
+}
+{% endschema %}

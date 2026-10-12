@@ -1,0 +1,48 @@
+<div class="announce" role="region" aria-label="Announcements">
+  <div class="announce__track">
+    {%- for copy in (1..2) -%}
+      <div class="announce__group{% if copy == 2 %} announce__group--clone{% endif %}" {% if copy == 2 %}aria-hidden="true"{% endif %}>
+        {%- for i in (1..4) -%}
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <span class="announce__item" {% if copy == 1 and i == 1 %}{{ block.shopify_attributes }}{% endif %}>{{ block.settings.text }}</span>
+            {%- endfor -%}
+          {%- else -%}
+            <span class="announce__item">Free shipping over Rs. 5,000 ✨</span>
+            <span class="announce__item">Winter Sale is live now ❄️</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping over Rs. 5,000 ✨"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Free shipping over Rs. 5,000 ✨" } },
+        { "type": "message", "settings": { "text": "Winter Sale is live now ❄️" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

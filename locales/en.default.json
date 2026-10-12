@@ -1,0 +1,17 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Search"
+    },
+    "cart": {
+      "title": "Your bag"
+    },
+    "404": {
+      "title": "Page not found"
+    }
+  }
+}

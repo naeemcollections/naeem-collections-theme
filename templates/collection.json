@@ -1,0 +1,161 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "boys-pants": {
+          "type": "child",
+          "settings": {
+            "parent": "kids-boys",
+            "title": "Pants",
+            "handle": "boys-pants",
+            "text": "Soft trousers for school and weekends.",
+            "fallback": "boys-pants.jpg"
+          }
+        },
+        "boys-shirts": {
+          "type": "child",
+          "settings": {
+            "parent": "kids-boys",
+            "title": "Shirts",
+            "handle": "boys-shirts",
+            "text": "Breathable shirts with an easy collar.",
+            "fallback": "boys-shirt.jpg"
+          }
+        },
+        "boys-tracksuits": {
+          "type": "child",
+          "settings": {
+            "parent": "kids-boys",
+            "title": "Tracksuits",
+            "handle": "boys-tracksuits",
+            "text": "Warm sets for colder mornings.",
+            "fallback": "boys-tracksuit.jpg"
+          }
+        },
+        "boys-shorts": {
+          "type": "child",
+          "settings": {
+            "parent": "kids-boys",
+            "title": "Shorts",
+            "handle": "boys-shorts",
+            "text": "Light shorts for play.",
+            "fallback": "boys-shorts.jpg"
+          }
+        },
+        "boys-sets": {
+          "type": "child",
+          "settings": {
+            "parent": "kids-boys",
+            "title": "Sets",
+            "handle": "boys-sets",
+            "text": "Matching pieces, ready to wear.",
+            "fallback": "boys-set.jpg"
+          }
+        },
+        "boys-6-pocket": {
+          "type": "child",
+          "settings": {
+            "parent": "kids-boys",
+            "title": "6 Pocket Trousers",
+            "handle": "boys-6-pocket-trousers",
+            "text": "Everyday trousers with six pockets.",
+            "fallback": "boys-6pocket.jpg"
+          }
+        },
+        "girls-tops": {
+          "type": "child",
+          "settings": {
+            "parent": "girls",
+            "title": "Tops",
+            "handle": "girls-tops",
+            "text": "Soft tops in blush and cream.",
+            "fallback": "girls-top.jpg"
+          }
+        },
+        "girls-suits": {
+          "type": "child",
+          "settings": {
+            "parent": "girls",
+            "title": "2pc Suits",
+            "handle": "girls-2pc-suits",
+            "text": "Coordinated two-piece suits.",
+            "fallback": "girls-suit.jpg"
+          }
+        },
+        "girls-pants": {
+          "type": "child",
+          "settings": {
+            "parent": "girls",
+            "title": "Pants",
+            "handle": "girls-pants",
+            "text": "Easy pants with a gentle fit.",
+            "fallback": "girls-pants.jpg"
+          }
+        },
+        "mens-pants": {
+          "type": "child",
+          "settings": {
+            "parent": "mens",
+            "title": "Pants",
+            "handle": "mens-pants",
+            "text": "Straight pants in calm colours.",
+            "fallback": "mens-pants.jpg"
+          }
+        },
+        "mens-shirts": {
+          "type": "child",
+          "settings": {
+            "parent": "mens",
+            "title": "Shirts",
+            "handle": "mens-shirts",
+            "text": "Relaxed shirts for everyday.",
+            "fallback": "mens-shirt.jpg"
+          }
+        },
+        "mens-6-pocket": {
+          "type": "child",
+          "settings": {
+            "parent": "mens",
+            "title": "6 Pocket Trousers",
+            "handle": "mens-6-pocket-trousers",
+            "text": "Utility trousers with six pockets.",
+            "fallback": "mens-6pocket.jpg"
+          }
+        },
+        "mens-belts": {
+          "type": "child",
+          "settings": {
+            "parent": "mens",
+            "title": "Belts",
+            "handle": "mens-belts",
+            "text": "Smooth belts to finish the look.",
+            "fallback": "mens-belt.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "boys-pants",
+        "boys-shirts",
+        "boys-tracksuits",
+        "boys-shorts",
+        "boys-sets",
+        "boys-6-pocket",
+        "girls-tops",
+        "girls-suits",
+        "girls-pants",
+        "mens-pants",
+        "mens-shirts",
+        "mens-6-pocket",
+        "mens-belts"
+      ],
+      "settings": {
+        "per_page": 12,
+        "intro_boys": "Soft trousers, easy shirts and sets for little days.",
+        "intro_girls": "Gentle colours and comfortable pieces for her.",
+        "intro_mens": "Quiet essentials with a clean, easy fit."
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,6 @@
+{%- comment -%} Accepts price in cents. {%- endcomment -%}
+{%- if shop.currency == 'PKR' -%}
+  Rs. {{ price | money_without_currency | replace: '.00', '' }}
+{%- else -%}
+  {{ price | money }}
+{%- endif -%}

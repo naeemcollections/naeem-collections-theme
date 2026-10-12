@@ -1,0 +1,44 @@
+<section class="section">
+  <div class="wrap page search-page">
+    <h1>Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="stack">
+      <label class="field">
+        <span>What are you looking for?</span>
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Shirts, suits, trousers">
+      </label>
+      <button class="btn" type="submit">Search</button>
+    </form>
+    {%- if search.performed -%}
+      {%- assign product_count = 0 -%}
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {%- assign product_count = product_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if product_count == 0 -%}
+        <div class="empty glass">
+          <h2 class="section__title">No matches</h2>
+          <p class="note">Try a piece name, or browse Kids Boys, Girls, and Mens.</p>
+        </div>
+      {%- else -%}
+        <div class="grid-products">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item %}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="note">Search the shop by piece or collection.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": [],
+  "presets": [{ "name": "Search" }]
+}
+{% endschema %}

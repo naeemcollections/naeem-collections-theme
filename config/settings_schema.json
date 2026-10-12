@@ -1,0 +1,116 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Naeem Collections",
+    "theme_version": "1.0.0",
+    "theme_author": "Naeem Collections",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://wa.me/923444865085"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo text",
+        "default": "Naeem Collections"
+      },
+      {
+        "type": "text",
+        "id": "tagline",
+        "label": "Tagline",
+        "default": "Soft styles for little days"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tagline",
+        "label": "Show tagline",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo image",
+        "info": "Optional. If empty, the text logo is used."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 80,
+        "max": 220,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo image width",
+        "default": 140
+      },
+      {
+        "type": "select",
+        "id": "heading_font",
+        "label": "Heading font",
+        "default": "Fraunces",
+        "options": [
+          { "value": "Fraunces", "label": "Fraunces" },
+          { "value": "Cormorant Garamond", "label": "Cormorant Garamond" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "body_font",
+        "label": "Body font",
+        "default": "Outfit",
+        "options": [
+          { "value": "Outfit", "label": "Outfit" },
+          { "value": "Nunito Sans", "label": "Nunito Sans" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Store details",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp number",
+        "info": "Country code, digits only. Example: 923444865085",
+        "default": "923444865085"
+      },
+      {
+        "type": "text",
+        "id": "phone_display",
+        "label": "Phone display",
+        "default": "+92 344 4865085"
+      },
+      {
+        "type": "textarea",
+        "id": "address",
+        "label": "Address",
+        "default": "12 Imran Plaza, Kareem Block Market, Lahore"
+      },
+      {
+        "type": "text",
+        "id": "shipping_time",
+        "label": "Delivery time",
+        "default": "2–5 days"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping over (Rs.)",
+        "default": "5,000"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_ink", "label": "Text", "default": "#3A2744" },
+      { "type": "color", "id": "color_muted", "label": "Muted text", "default": "#5C4868" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#7C3B54" },
+      { "type": "color", "id": "color_blush", "label": "Blush", "default": "#F4D5DF" },
+      { "type": "color", "id": "color_lilac", "label": "Lilac", "default": "#E6D6F2" },
+      { "type": "color", "id": "color_paper", "label": "Background", "default": "#FBF7F8" }
+    ]
+  }
+]

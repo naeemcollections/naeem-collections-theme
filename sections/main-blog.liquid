@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="wrap page">
+    <h1>{{ blog.title }}</h1>
+    <div class="stack">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}">{{ article.title }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [],
+  "presets": [{ "name": "Blog" }]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="section">
+  <div class="wrap page">
+    <div class="product-layout">
+      <div class="gallery">
+        {%- if product.images.size > 0 -%}
+          {%- for image in product.images -%}
+            {%- assign alt = image.alt | default: product.title -%}
+            <div class="gallery__frame">
+              {{ image | image_url: width: 1400 | image_tag: class: 'gallery__img', alt: alt, loading: 'lazy', widths: '500, 900, 1400' }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="gallery__frame">
+            <img class="gallery__img" src="{{ 'boys-shirt.jpg' | asset_url }}" alt="{{ product.title | escape }}">
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="product-info glass">
+        <h1>{{ product.title }}</h1>
+        <p class="price">
+          {%- if current.compare_at_price > current.price -%}
+            <s>{% render 'price', price: current.compare_at_price %}</s>
+            <span class="now" data-price>{% render 'price', price: current.price %}</span>
+          {%- else -%}
+            <span data-price>{% render 'price', price: current.price %}</span>
+          {%- endif -%}
+        </p>
+        {%- if product.description != blank -%}
+          <div class="rte">{{ product.description }}</div>
+        {%- endif -%}
+        <form data-product-form>
+          <script type="application/json" data-variants>{{ product.variants | json }}</script>
+          <input type="hidden" name="id" value="{{ current.id }}">
+          {%- unless product.has_only_default_variant -%}
+            <fieldset class="sizes">
+              <legend>{{ product.options.first | escape }}</legend>
+              {%- for variant in product.variants -%}
+                <label class="size">
+                  <input type="radio" name="option" value="{{ variant.id }}" {% if variant.id == current.id %}checked{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                  <span>{{ variant.title | escape }}</span>
+                </label>
+              {%- endfor -%}
+            </fieldset>
+          {%- endunless -%}
+          <div class="qty-row">
+            <span class="note">Quantity</span>
+            <div class="qty">
+              <button type="button" data-qty-step="-1" aria-label="Decrease quantity">−</button>
+              <input name="quantity" value="1" inputmode="numeric" aria-label="Quantity">
+              <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <button class="btn btn--block" type="submit" {% unless current.available %}disabled{% endunless %}>
+            {%- if current.available -%}Add to bag{%- else -%}Sold out{%- endif -%}
+          </button>
+          <p class="added" data-added hidden>Added to your bag. <a href="{{ routes.cart_url }}">Review and order on WhatsApp</a></p>
+          <p class="added" data-form-error hidden></p>
+        </form>
+        <p class="note">Orders are confirmed on WhatsApp. Delivery in {{ settings.shipping_time }}. Free shipping over Rs. {{ settings.free_shipping_threshold }}.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [],
+  "presets": [
+    { "name": "Product" }
+  ]
+}
+{% endschema %}

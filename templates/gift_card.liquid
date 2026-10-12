@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gift card — {{ shop.name }}</title>
+  {{ content_for_header }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+  <main class="wrap page" style="justify-items: center; text-align: center;">
+    <p class="logo__name">{{ shop.name }}</p>
+    <h1>Gift card</h1>
+    <p>{{ gift_card.balance | money }}</p>
+    <p class="note">{{ gift_card.code }}</p>
+  </main>
+</body>
+</html>

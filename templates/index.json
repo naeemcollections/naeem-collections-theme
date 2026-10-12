@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide-boys": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Kids Boys",
+            "heading": "Naeem Collections",
+            "text": "Soft styles for little days",
+            "button_label": "Shop boys",
+            "button_link": "/collections/kids-boys",
+            "fallback": "hero-boys.jpg"
+          }
+        },
+        "slide-girls": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Girls",
+            "heading": "Winter Sale is live now",
+            "text": "Warm layers and blush tones, ready for colder days.",
+            "button_label": "Shop girls",
+            "button_link": "/collections/girls",
+            "fallback": "hero-girls.jpg"
+          }
+        },
+        "slide-mens": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Mens",
+            "heading": "New arrivals for him",
+            "text": "Clean cuts and easy pieces, made to wear on repeat.",
+            "button_label": "Shop mens",
+            "button_link": "/collections/mens",
+            "fallback": "hero-mens.jpg"
+          }
+        }
+      },
+      "block_order": ["slide-boys", "slide-girls", "slide-mens"],
+      "settings": {
+        "autoplay": true,
+        "speed": 6,
+        "aria_label": "Featured stories"
+      }
+    },
+    "categories": {
+      "type": "category-cards",
+      "blocks": {
+        "cat-boys": {
+          "type": "category",
+          "settings": {
+            "title": "Kids Boys",
+            "text": "Pants, shirts, tracksuits and sets",
+            "link": "/collections/kids-boys",
+            "fallback": "cat-boys.jpg"
+          }
+        },
+        "cat-girls": {
+          "type": "category",
+          "settings": {
+            "title": "Girls",
+            "text": "Tops, 2pc suits and pants",
+            "link": "/collections/girls",
+            "fallback": "cat-girls.jpg"
+          }
+        },
+        "cat-mens": {
+          "type": "category",
+          "settings": {
+            "title": "Mens",
+            "text": "Pants, shirts, trousers and belts",
+            "link": "/collections/mens",
+            "fallback": "cat-mens.jpg"
+          }
+        }
+      },
+      "block_order": ["cat-boys", "cat-girls", "cat-mens"],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "Featured Products",
+        "lead": "",
+        "limit": 8
+      }
+    }
+  },
+  "order": ["hero", "categories", "featured"]
+}

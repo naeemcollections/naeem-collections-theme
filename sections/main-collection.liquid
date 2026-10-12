@@ -1,0 +1,117 @@
+<section class="section">
+  <div class="wrap page">
+    {%- assign parent_handle = '' -%}
+    {%- assign child_text = '' -%}
+    {%- assign is_parent = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.handle == collection.handle -%}
+        {%- assign parent_handle = block.settings.parent -%}
+        {%- assign child_text = block.settings.text -%}
+      {%- endif -%}
+      {%- if block.settings.parent == collection.handle -%}
+        {%- assign is_parent = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- case parent_handle -%}
+      {%- when 'kids-boys' -%}{%- assign parent_title = 'Kids Boys' -%}
+      {%- when 'girls' -%}{%- assign parent_title = 'Girls' -%}
+      {%- when 'mens' -%}{%- assign parent_title = 'Mens' -%}
+    {%- endcase -%}
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true">/</span>
+      {%- if parent_handle != blank -%}
+        <a href="/collections/{{ parent_handle }}">{{ parent_title }}</a>
+        <span aria-hidden="true">/</span>
+      {%- endif -%}
+      <span>{{ collection.title }}</span>
+    </nav>
+
+    <div class="section__head">
+      <h1>{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="rte section__lead">{{ collection.description }}</div>
+      {%- elsif is_parent -%}
+        {%- case collection.handle -%}
+          {%- when 'kids-boys' -%}<p class="section__lead">{{ section.settings.intro_boys }}</p>
+          {%- when 'girls' -%}<p class="section__lead">{{ section.settings.intro_girls }}</p>
+          {%- when 'mens' -%}<p class="section__lead">{{ section.settings.intro_mens }}</p>
+        {%- endcase -%}
+      {%- elsif child_text != blank -%}
+        <p class="section__lead">{{ child_text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if is_parent -%}
+      <div class="grid-subs">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.parent == collection.handle -%}
+            <a class="sub-card" href="/collections/{{ block.settings.handle }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1000 | image_tag: alt: block.settings.title, loading: 'lazy', widths: '400, 700' }}
+              {%- else -%}
+                <img src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.title | escape }}" width="800" height="1000" loading="lazy">
+              {%- endif -%}
+              <span class="sub-card__label glass">
+                <strong>{{ block.settings.title | escape }}</strong>
+                {%- if block.settings.text != blank -%}
+                  <small>{{ block.settings.text | escape }}</small>
+                {%- endif -%}
+              </span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {%- paginate collection.products by section.settings.per_page -%}
+        {%- if collection.products.size == 0 -%}
+          <div class="empty glass">
+            <h2 class="section__title">Nothing here yet</h2>
+            <p class="note">Pieces will show up as soon as they’re added to this collection.</p>
+          </div>
+        {%- else -%}
+          <div class="grid-products">
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product %}
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="Pagination">
+              {{ paginate | default_pagination }}
+            </nav>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "range", "id": "per_page", "min": 8, "max": 24, "step": 4, "label": "Products per page", "default": 12 },
+    { "type": "text", "id": "intro_boys", "label": "Kids Boys intro", "default": "Soft trousers, easy shirts and sets for little days." },
+    { "type": "text", "id": "intro_girls", "label": "Girls intro", "default": "Gentle colours and comfortable pieces for her." },
+    { "type": "text", "id": "intro_mens", "label": "Mens intro", "default": "Quiet essentials with a clean, easy fit." }
+  ],
+  "blocks": [
+    {
+      "type": "child",
+      "name": "Sub-collection",
+      "settings": [
+        { "type": "text", "id": "parent", "label": "Parent handle", "default": "kids-boys", "info": "kids-boys, girls, or mens" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Pants" },
+        { "type": "text", "id": "handle", "label": "Collection handle", "default": "boys-pants" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Soft trousers for school and weekends." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Fallback image filename", "default": "boys-pants.jpg" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Collection" }
+  ]
+}
+{% endschema %}

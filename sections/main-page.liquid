@@ -1,0 +1,72 @@
+<section class="section">
+  <div class="wrap page">
+    <div class="prose">
+      <h1>{{ page.title }}</h1>
+      {%- if page.content != blank -%}
+        <div class="rte">{{ page.content }}</div>
+      {%- else -%}
+        {%- case page.handle -%}
+          {%- when 'about' -%}
+            <div class="rte">{{ section.settings.about }}</div>
+          {%- when 'shipping' -%}
+            <div class="rte">{{ section.settings.shipping }}</div>
+          {%- when 'contact' -%}
+            <div class="rte">{{ section.settings.contact }}</div>
+          {%- else -%}
+            {%- if section.settings.body != blank -%}
+              <div class="rte">{{ section.settings.body }}</div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endif -%}
+    </div>
+    {%- if page.handle == 'shipping' -%}
+      <aside class="facts glass">
+        <p>Delivery in {{ settings.shipping_time }}</p>
+        <p>Free shipping over Rs. {{ settings.free_shipping_threshold }}</p>
+      </aside>
+    {%- elsif page.handle == 'about' or page.handle == 'contact' -%}
+      <aside class="facts glass">
+        <p>{{ settings.address }}</p>
+        <p><a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" rel="noopener">WhatsApp {{ settings.phone_display }}</a></p>
+        {%- if page.handle == 'contact' -%}
+          <a class="btn" href="https://wa.me/{{ settings.whatsapp_number }}?text={{ 'Hello Naeem Collections, I have a question.' | url_encode }}" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        {%- endif -%}
+      </aside>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "about",
+      "label": "About story",
+      "default": "<p>Naeem Collections is a small clothing house in Lahore. We make soft, easy pieces for kids boys, girls, and men — clothes that feel kind on long days and still look pulled-together.</p><p>The shop sits at 12 Imran Plaza, Kareem Block Market. Come by, or message us on WhatsApp and we’ll help you choose sizes, colours, and what to pair.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "shipping",
+      "label": "Shipping story",
+      "default": "<p>We deliver across Pakistan in 2–5 days.</p><p>Shipping is free on orders over Rs. 5,000. For smaller orders, we confirm the delivery charge on WhatsApp before we pack.</p><p>You’ll hear from us on WhatsApp when the order is on its way.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "contact",
+      "label": "Contact story",
+      "default": "<p>Message us on WhatsApp and we’ll reply with sizes, colours, and delivery details.</p><p>Orders are placed from your bag — there is no online checkout. We confirm everything in the chat.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Other pages",
+      "info": "Used when the page handle is not about, shipping, or contact, and the page body in admin is empty."
+    }
+  ],
+  "presets": [
+    { "name": "Page" }
+  ]
+}
+{% endschema %}

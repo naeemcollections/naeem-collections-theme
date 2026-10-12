@@ -1,0 +1,14 @@
+<section class="section">
+  <div class="wrap page prose">
+    <h1>{{ article.title }}</h1>
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [],
+  "presets": [{ "name": "Article" }]
+}
+{% endschema %}

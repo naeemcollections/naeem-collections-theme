@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_blush }}">
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.logo_image != blank -%}
+    <link rel="icon" href="{{ settings.logo_image | image_url: width: 64 }}">
+  {%- else -%}
+    <link rel="icon" href="{{ 'favicon.svg' | asset_url }}" type="image/svg+xml">
+  {%- endif -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Fraunces:ital,opsz,wght@0,9..144,460;0,9..144,560;1,9..144,500&family=Nunito+Sans:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  {{ content_for_header }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {% style %}
+    :root {
+      --ink: {{ settings.color_ink }};
+      --muted: {{ settings.color_muted }};
+      --accent: {{ settings.color_accent }};
+      --blush: {{ settings.color_blush }};
+      --lilac: {{ settings.color_lilac }};
+      --paper: {{ settings.color_paper }};
+      --display: {{ settings.heading_font | json }}, Georgia, serif;
+      --body: {{ settings.body_font | json }}, sans-serif;
+      --logo-w: {{ settings.logo_width }}px;
+    }
+  {% endstyle %}
+  <script>
+    window.NaeemTheme = {
+      whatsapp: {{ settings.whatsapp_number | json }},
+      shippingTime: {{ settings.shipping_time | json }},
+      freeShipping: {{ settings.free_shipping_threshold | json }},
+      currency: {{ shop.currency | json }}
+    };
+  </script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</head>
+<body>
+  <a class="skip" href="#MainContent">Skip to content</a>
+  <div class="topbar">
+    {% sections 'header-group' %}
+  </div>
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+  {% sections 'footer-group' %}
+</body>
+</html>

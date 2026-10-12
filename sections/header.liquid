@@ -1,0 +1,94 @@
+<header class="header">
+  <div class="header__bar wrap">
+    <button class="icon-btn header__menu" type="button" data-menu aria-expanded="false" aria-label="Open menu">
+      {% render 'icon', name: 'menu' %}
+    </button>
+    <a class="logo" href="{{ routes.root_url }}">
+      {%- if settings.logo_image != blank -%}
+        {{ settings.logo_image | image_url: width: 480 | image_tag: class: 'logo__img', alt: settings.logo_text }}
+      {%- else -%}
+        <span class="logo__name">{{ settings.logo_text | escape }}</span>
+      {%- endif -%}
+      {%- if settings.show_tagline -%}
+        <span class="logo__tag">{{ settings.tagline | escape }}</span>
+      {%- endif -%}
+    </a>
+    <div class="header__tools">
+      <button class="icon-btn" type="button" data-search-open aria-label="Search">
+        {% render 'icon', name: 'search' %}
+      </button>
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Bag">
+        {% render 'icon', name: 'bag' %}
+        <span class="cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+    <nav class="header__nav" aria-label="Primary">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="/collections/kids-boys">Kids Boys</a>
+        <a href="/collections/girls">Girls</a>
+        <a href="/collections/mens">Mens</a>
+        <a href="/pages/about">About</a>
+      {%- endif -%}
+    </nav>
+  </div>
+</header>
+
+<div class="drawer" data-drawer hidden>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <span class="logo__name">{{ settings.logo_text | escape }}</span>
+      <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+    <nav aria-label="Mobile">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.url }}">{{ block.settings.label | escape }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="/collections/kids-boys">Kids Boys</a>
+        <a href="/collections/girls">Girls</a>
+        <a href="/collections/mens">Mens</a>
+        <a href="/pages/about">About</a>
+      {%- endif -%}
+    </nav>
+  </div>
+</div>
+
+<div class="search-modal" data-search-modal hidden>
+  <button class="search-modal__backdrop" type="button" data-search-close aria-label="Close search"></button>
+  <form class="search-modal__card glass" action="{{ routes.search_url }}" method="get" role="search">
+    <label class="field">
+      <span>Search</span>
+      <input type="search" name="q" placeholder="Search shirts, suits, trousers" autocomplete="off">
+    </label>
+    <button class="btn" type="submit">Search</button>
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Home" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Header" }
+  ]
+}
+{% endschema %}

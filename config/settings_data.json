@@ -1,0 +1,21 @@
+{
+  "current": {
+    "logo_text": "Naeem Collections",
+    "tagline": "Soft styles for little days",
+    "show_tagline": true,
+    "logo_width": 140,
+    "heading_font": "Fraunces",
+    "body_font": "Outfit",
+    "whatsapp_number": "923444865085",
+    "phone_display": "+92 344 4865085",
+    "address": "12 Imran Plaza, Kareem Block Market, Lahore",
+    "shipping_time": "2–5 days",
+    "free_shipping_threshold": "5,000",
+    "color_ink": "#3A2744",
+    "color_muted": "#5C4868",
+    "color_accent": "#7C3B54",
+    "color_blush": "#F4D5DF",
+    "color_lilac": "#E6D6F2",
+    "color_paper": "#FBF7F8"
+  }
+}

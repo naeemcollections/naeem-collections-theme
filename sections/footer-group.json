@@ -1,0 +1,38 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop-boys": {
+          "type": "shop_link",
+          "settings": { "label": "Kids Boys", "url": "/collections/kids-boys" }
+        },
+        "shop-girls": {
+          "type": "shop_link",
+          "settings": { "label": "Girls", "url": "/collections/girls" }
+        },
+        "shop-mens": {
+          "type": "shop_link",
+          "settings": { "label": "Mens", "url": "/collections/mens" }
+        },
+        "info-about": {
+          "type": "info_link",
+          "settings": { "label": "About", "url": "/pages/about" }
+        },
+        "info-shipping": {
+          "type": "info_link",
+          "settings": { "label": "Shipping", "url": "/pages/shipping" }
+        },
+        "info-contact": {
+          "type": "info_link",
+          "settings": { "label": "Contact", "url": "/pages/contact" }
+        }
+      },
+      "block_order": ["shop-boys", "shop-girls", "shop-mens", "info-about", "info-shipping", "info-contact"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}

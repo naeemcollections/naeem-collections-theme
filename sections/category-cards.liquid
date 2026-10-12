@@ -1,0 +1,54 @@
+<section class="section">
+  <div class="wrap">
+    {%- if section.settings.heading != blank -%}
+      <div class="section__head">
+        <h2 class="section__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+    {%- else -%}
+      <h2 class="sr-only">Shop by category</h2>
+    {%- endif -%}
+    <div class="grid-cats">
+      {%- for block in section.blocks -%}
+        <a class="cat-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: alt: block.settings.title, loading: 'lazy', widths: '400, 700, 1000' }}
+          {%- else -%}
+            <img src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1200" loading="lazy">
+          {%- endif -%}
+          <span class="cat-card__label glass">
+            <strong>{{ block.settings.title | escape }}</strong>
+            {%- if block.settings.text != blank -%}
+              <small>{{ block.settings.text | escape }}</small>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category cards",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave blank to show only the cards." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Kids Boys" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Pants, shirts, tracksuits and sets" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Fallback image filename", "default": "cat-boys.jpg" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    { "name": "Category cards" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{%- if product != blank -%}
+  <a class="product-card" href="{{ product.url }}">
+    <div class="product-card__media">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="badge">Sale</span>
+      {%- endif -%}
+      {%- if product.featured_image -%}
+        {%- assign alt = product.featured_image.alt | default: product.title -%}
+        {{ product.featured_image | image_url: width: 900 | image_tag: alt: alt, loading: 'lazy', widths: '360, 540, 800', class: 'product-card__img' }}
+      {%- else -%}
+        <img src="{{ 'boys-pants.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="900" height="1200">
+      {%- endif -%}
+    </div>
+    <h3 class="product-card__title">{{ product.title }}</h3>
+    <p class="price">
+      {%- if product.compare_at_price > product.price -%}
+        <s>{% render 'price', price: product.compare_at_price %}</s>
+        <span class="now">{% render 'price', price: product.price %}</span>
+      {%- else -%}
+        {% render 'price', price: product.price %}
+      {%- endif -%}
+    </p>
+  </a>
+{%- else -%}
+  <a class="product-card" href="{{ url }}">
+    <div class="product-card__media">
+      {%- if badge != blank -%}
+        <span class="badge">{{ badge }}</span>
+      {%- endif -%}
+      <img src="{{ image | asset_url }}" alt="{{ title | escape }}" width="900" height="1200" loading="lazy">
+    </div>
+    <h3 class="product-card__title">{{ title }}</h3>
+    <p class="price">
+      {%- if compare != blank -%}
+        <s>{{ compare }}</s>
+        <span class="now">{{ price_label }}</span>
+      {%- else -%}
+        {{ price_label }}
+      {%- endif -%}
+    </p>
+  </a>
+{%- endif -%}

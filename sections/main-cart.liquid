@@ -1,0 +1,89 @@
+{%- assign threshold = settings.free_shipping_threshold | remove: ',' | plus: 0 | times: 100 -%}
+<section class="section">
+  <div class="wrap page">
+    <div class="section__head">
+      <h1>Your bag</h1>
+      <p class="section__lead">Tell us where to send it. We’ll confirm the order on WhatsApp.</p>
+    </div>
+    {%- if cart.item_count == 0 -%}
+      <div class="empty glass">
+        <h2 class="section__title">Your bag is empty</h2>
+        <p class="note">Add a piece, then place the order on WhatsApp.</p>
+        <a class="btn" href="{{ routes.root_url }}">Continue shopping</a>
+      </div>
+    {%- else -%}
+      <div class="cart-layout">
+        <div>
+          {%- for item in cart.items -%}
+            <article class="line" data-line-key="{{ item.key }}" data-qty="{{ item.quantity }}">
+              <a href="{{ item.url }}">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 240 | image_tag: alt: item.title, loading: 'lazy' }}
+                {%- endif -%}
+              </a>
+              <div>
+                <div class="line__top">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                  <strong>{% render 'price', price: item.final_line_price %}</strong>
+                </div>
+                {%- unless item.variant.title == 'Default Title' -%}
+                  <p class="note">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <div class="qty">
+                  <button type="button" data-delta="-1" aria-label="Decrease quantity">−</button>
+                  <span>{{ item.quantity }}</span>
+                  <button type="button" data-delta="1" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="text-btn" type="button" data-delta="-{{ item.quantity }}">Remove</button>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+        <form class="summary glass stack" data-whatsapp>
+          {%- if threshold > 0 -%}
+            {%- assign progress = cart.total_price | times: 100 | divided_by: threshold -%}
+            {%- if progress > 100 -%}{%- assign progress = 100 -%}{%- endif -%}
+            <div class="ship-meter" style="--p: {{ progress }}%">
+              <span></span>
+            </div>
+            {%- if cart.total_price >= threshold -%}
+              <p class="note">You have free shipping.</p>
+            {%- else -%}
+              {%- assign remain = threshold | minus: cart.total_price -%}
+              <p class="note">Add {% render 'price', price: remain %} more for free shipping.</p>
+            {%- endif -%}
+          {%- endif -%}
+          <label class="field">
+            <span>Name</span>
+            <input name="name" required autocomplete="name">
+          </label>
+          <label class="field">
+            <span>Phone</span>
+            <input name="phone" type="tel" required autocomplete="tel">
+          </label>
+          <label class="field">
+            <span>Address</span>
+            <textarea name="address" required autocomplete="street-address"></textarea>
+          </label>
+          <div class="total-row">
+            <span>Total</span>
+            <strong>{% render 'price', price: cart.total_price %}</strong>
+          </div>
+          <button class="btn btn--block" type="submit">Order on WhatsApp</button>
+          <p class="note">Delivery in {{ settings.shipping_time }}. Free shipping over Rs. {{ settings.free_shipping_threshold }}.</p>
+        </form>
+      </div>
+      <script type="application/json" id="CartJson">{{ cart | json }}</script>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [],
+  "presets": [
+    { "name": "Cart" }
+  ]
+}
+{% endschema %}

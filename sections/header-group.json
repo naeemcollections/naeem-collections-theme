@@ -1,0 +1,53 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "msg-shipping": {
+          "type": "message",
+          "settings": {
+            "text": "Free shipping over Rs. 5,000 ✨"
+          }
+        },
+        "msg-sale": {
+          "type": "message",
+          "settings": {
+            "text": "Winter Sale is live now ❄️"
+          }
+        }
+      },
+      "block_order": ["msg-shipping", "msg-sale"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "nav-home": {
+          "type": "link",
+          "settings": { "label": "Home", "url": "/" }
+        },
+        "nav-boys": {
+          "type": "link",
+          "settings": { "label": "Kids Boys", "url": "/collections/kids-boys" }
+        },
+        "nav-girls": {
+          "type": "link",
+          "settings": { "label": "Girls", "url": "/collections/girls" }
+        },
+        "nav-mens": {
+          "type": "link",
+          "settings": { "label": "Mens", "url": "/collections/mens" }
+        },
+        "nav-about": {
+          "type": "link",
+          "settings": { "label": "About", "url": "/pages/about" }
+        }
+      },
+      "block_order": ["nav-home", "nav-boys", "nav-girls", "nav-mens", "nav-about"],
+      "settings": {}
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

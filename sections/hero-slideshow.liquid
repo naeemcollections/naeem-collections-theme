@@ -1,0 +1,93 @@
+<div class="hero-wrap">
+  <div class="wrap">
+    <section
+      class="hero"
+      data-hero
+      data-autoplay="{{ section.settings.autoplay }}"
+      data-speed="{{ section.settings.speed }}"
+      aria-roledescription="carousel"
+      aria-label="{{ section.settings.aria_label | escape }}"
+    >
+      <div class="hero__viewport">
+        <div class="hero__track">
+          {%- for block in section.blocks -%}
+            <article class="hero__slide" data-slide {{ block.shopify_attributes }} {% unless forloop.first %}inert{% endunless %}>
+              {%- if block.settings.image != blank -%}
+                {%- if forloop.first -%}
+                  {{ block.settings.image | image_url: width: 2000 | image_tag: class: 'hero__img', alt: block.settings.heading, loading: 'eager', widths: '800, 1200, 1800' }}
+                {%- else -%}
+                  {{ block.settings.image | image_url: width: 2000 | image_tag: class: 'hero__img', alt: block.settings.heading, loading: 'lazy', widths: '800, 1200, 1800' }}
+                {%- endif -%}
+              {%- else -%}
+                <img
+                  class="hero__img"
+                  src="{{ block.settings.fallback | asset_url }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  width="1600"
+                  height="900"
+                  {% if forloop.first %}loading="eager"{% else %}loading="lazy"{% endif %}
+                >
+              {%- endif -%}
+              <div class="hero__shade"></div>
+              <div class="hero__content">
+                <div class="hero__card glass">
+                  {%- if block.settings.eyebrow != blank -%}
+                    <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
+                  {%- endif -%}
+                  {%- if forloop.first -%}
+                    <h1>{{ block.settings.heading | escape }}</h1>
+                  {%- else -%}
+                    <h2>{{ block.settings.heading | escape }}</h2>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p>{{ block.settings.text | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                    <a class="btn" href="{{ block.settings.button_link }}">{{ block.settings.button_label | escape }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+        <button class="hero__arrow hero__arrow--prev" type="button" data-prev aria-label="Previous slide">{% render 'icon', name: 'left' %}</button>
+        <button class="hero__arrow hero__arrow--next" type="button" data-next aria-label="Next slide">{% render 'icon', name: 'right' %}</button>
+      </div>
+      <div class="hero__dots">
+        {%- for block in section.blocks -%}
+          <button type="button" data-dot aria-label="Go to slide {{ forloop.index }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero slideshow",
+  "settings": [
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "range", "id": "speed", "min": 4, "max": 10, "step": 1, "unit": "s", "label": "Seconds per slide", "default": 6 },
+    { "type": "text", "id": "aria_label", "label": "Slideshow label", "default": "Featured stories" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Kids Boys" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Naeem Collections" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Soft styles for little days" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop boys" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Fallback image filename", "default": "hero-boys.jpg", "info": "Used until you pick an image. File must live in theme assets." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    { "name": "Hero slideshow" }
+  ]
+}
+{% endschema %}
